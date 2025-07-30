@@ -1,3 +1,4 @@
+#include "camera.h"
 #include "input.h"
 #include "raylib.h"
 
@@ -20,6 +21,7 @@ int main(void) {
   while (!WindowShouldClose()) {
     UpdateCamera(&camera, CAMERA_CUSTOM);
     kb_input(&input);
+    camera_update(&input, &camera);
     BeginDrawing();
     ClearBackground(RAYWHITE);
     BeginMode3D(camera);

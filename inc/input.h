@@ -10,7 +10,7 @@ typedef struct{
 
 typedef struct{
   //should be something like view and 
-  //actions or something general
+  //actions or something general, might add toggle key press
   Vector2 mouse;
   key_press buttons[4];
 }input_state;

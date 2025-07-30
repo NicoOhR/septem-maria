@@ -9,12 +9,13 @@ set(GAME_INCLUDE inc)
 set(GAME_SOURCE 
     "${CMAKE_CURRENT_SOURCE_DIR}/src/main.c"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/input.c"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/camera.c"
 )
 
 add_executable(${PROJECT_NAME} ${GAME_SOURCE})
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${GAME_INCLUDE})
-target_link_libraries(${PROJECT_NAME} raylib)
+target_link_libraries(${PROJECT_NAME} raylib m)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
