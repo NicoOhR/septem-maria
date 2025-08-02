@@ -3,6 +3,7 @@
 #include <math.h>
 #include <raylib.h>
 #include <stdio.h>
+
 void camera_update(input_state *input, ship_state *ship, Camera3D *camera) {
   // the camera is always targeted at the player position, therefore, it is the
   // camera *position* which gets updated. For now I like cyld, might make it

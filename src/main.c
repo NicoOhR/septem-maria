@@ -34,10 +34,15 @@ int main(void) {
   };
 
   ship_state ship = {
-      .position = (Vector3){0},
+      .position = (Vector3){1.0f, 1.0f, 1.0f},
       .heading = (Quaternion){0},
-
   };
+
+  Model model = LoadModel("./res/boat/12219_boat_v2_L2.obj");
+  Texture2D texture = LoadTexture("./res/boat/boat_body_diffuse.jpg");
+  model.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = texture;
+  BoundingBox bounds = GetMeshBoundingBox(model.meshes[0]);
+  // TODO figure out texture
 
   while (!WindowShouldClose()) {
     UpdateCamera(&camera, CAMERA_CUSTOM);
@@ -50,11 +55,12 @@ int main(void) {
     ClearBackground(RAYWHITE);
     BeginMode3D(camera);
     DrawGrid(20, 1.0f);
+    DrawModel(model, (Vector3){0.0f, 0.0f, 0.0f}, 0.005f, DARKGRAY);
     DrawCube(ship.position, 1.0f, 1.0f, 1.0f, BLACK);
     EndMode3D();
     EndDrawing();
   }
-
+  UnloadModel(model);
   CloseWindow();
 
   return 0;
