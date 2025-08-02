@@ -10,6 +10,7 @@ set(GAME_SOURCE
     "${CMAKE_CURRENT_SOURCE_DIR}/src/main.c"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/input.c"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/camera.c"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/ship.c"
 )
 
 add_executable(${PROJECT_NAME} ${GAME_SOURCE})
