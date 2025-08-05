@@ -7,7 +7,9 @@
 void camera_update(input_state *input, ship_state *ship, Camera3D *camera) {
   // the camera is always targeted at the player position, therefore, it is the
   // camera *position* which gets updated. For now I like cyld, might make it
-  // spherical. xyz is in game dev-ism order, xz is horizontal plane and y is
+  // spherical. Additional linear translation to keep the player centered
+  //
+  // xyz is in game dev-ism order, xz is horizontal plane and y is
   // normal to that
 
   float_t phi = (input->view.x / (float_t)GetScreenWidth()) * PI * 2;

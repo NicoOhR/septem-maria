@@ -2,6 +2,7 @@
 #include "input.h"
 #include "raylib.h"
 #include "ship.h"
+#include <raymath.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -14,6 +15,10 @@ int main(void) {
   camera.up = (Vector3){0.0f, 1.0f, 0.0f};
   camera.fovy = 45.0f;
   camera.projection = CAMERA_PERSPECTIVE;
+  double theta = 3 * PI / 4;
+  Vector3 u = {0.0f, 0.0f, 1.0f};
+  Quaternion upright_transformation = {cos(theta), sin(theta) * u.x,
+                                       sin(theta) * u.y, sin(theta) * u.z};
 
   input_state input = {
       .view = (Vector2){0.0f, 0.0f},
@@ -42,7 +47,8 @@ int main(void) {
   Texture2D texture = LoadTexture("./res/boat/boat_body_diffuse.jpg");
   model.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = texture;
   BoundingBox bounds = GetMeshBoundingBox(model.meshes[0]);
-  // TODO figure out texture
+
+  model.transform = QuaternionToMatrix(upright_transformation);
 
   while (!WindowShouldClose()) {
     UpdateCamera(&camera, CAMERA_CUSTOM);
@@ -55,8 +61,8 @@ int main(void) {
     ClearBackground(RAYWHITE);
     BeginMode3D(camera);
     DrawGrid(20, 1.0f);
-    DrawModel(model, (Vector3){0.0f, 0.0f, 0.0f}, 0.005f, DARKGRAY);
-    DrawCube(ship.position, 1.0f, 1.0f, 1.0f, BLACK);
+    DrawModel(model, ship.position, 0.005f, DARKGRAY);
+    // DrawCube(ship.position, 1.0f, 1.0f, 1.0f, BLACK);
     EndMode3D();
     EndDrawing();
   }
