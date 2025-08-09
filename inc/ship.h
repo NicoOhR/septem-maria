@@ -9,7 +9,7 @@
 
 typedef struct{
   Vector3 position;
-  Quaternion heading;
+  Quaternion orientation;
 }ship_state ;
 
 void ship_update(input_state *input, ship_state* ship);
