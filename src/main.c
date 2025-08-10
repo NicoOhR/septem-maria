@@ -34,22 +34,12 @@ int main(void) {
           },
   };
 
-  double theta = -PI / 2.0;
-  Vector3 u = {1.0f, 0.0f, 0.0f};
-  Quaternion upright_transformation;
-  upright_transformation = QuaternionFromAxisAngle(u, (float)theta);
-  theta = PI;
-  Vector3 v = {0.0f, 1.0f, 0.0f};
-  Quaternion turn_around = QuaternionFromAxisAngle(v, (float)theta);
-  Quaternion comp = QuaternionMultiply(turn_around, upright_transformation);
-  ship_state ship = {
-      .position = (Vector3){0.0f, 0.0f, 0.0f},
-      .orientation = QuaternionNormalize(comp),
-  };
+  ship_state ship = {.position = (Vector3){0.0f, 0.0f, 0.0f},
+                     .orientation = (Quaternion){0.0f, 0.0f, 0.0f, 1.0f}};
 
-  Model model = LoadModel("./res/boat/12219_boat_v2_L2.obj");
-  Texture2D texture = LoadTexture("./res/boat/boat_body_diffuse.jpg");
-  model.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = texture;
+  Model model = LoadModel("./res/boat/fixed.obj");
+  // Texture2D texture = LoadTexture("./res/boat/boat_body_diffuse.jpg");
+  // model.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = texture;
   BoundingBox bounds = GetMeshBoundingBox(model.meshes[0]);
 
   while (!WindowShouldClose()) {
@@ -58,15 +48,18 @@ int main(void) {
     kb_input(&input);
     camera_update(&input, &ship, &camera);
     ship_update(&input, &ship);
+
     BeginDrawing();
     ClearBackground(RAYWHITE);
     BeginMode3D(camera);
     DrawGrid(20, 1.0f);
+
     float ang;
     Vector3 ax;
     QuaternionToAxisAngle(ship.orientation, &ax, &ang);
     DrawModelEx(model, ship.position, ax, RAD2DEG * ang,
-                (Vector3){0.005f, 0.005f, 0.005f}, DARKGRAY);
+                (Vector3){1.0f, 1.0f, 1.0f}, DARKGRAY);
+
     const float L = 5.0f;
     Vector3 right =
         Vector3RotateByQuaternion((Vector3){1, 0, 0}, ship.orientation);
@@ -74,6 +67,7 @@ int main(void) {
         Vector3RotateByQuaternion((Vector3){0, 1, 0}, ship.orientation);
     Vector3 fwd =
         Vector3RotateByQuaternion((Vector3){0, 0, 1}, ship.orientation);
+
     DrawLine3D(ship.position, Vector3Add(ship.position, Vector3Scale(right, L)),
                RED);
     DrawLine3D(ship.position, Vector3Add(ship.position, Vector3Scale(up, L)),
