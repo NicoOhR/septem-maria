@@ -1,0 +1,26 @@
+[
+{
+  "directory": "/home/nicoor/Project/septem_maria/build/Debug",
+  "command": "/usr/bin/cc -I/home/nicoor/Project/septem_maria/inc -g -std=gnu11 -I/usr/include -o CMakeFiles/septem_maria.dir/src/main.c.o -c /home/nicoor/Project/septem_maria/src/main.c",
+  "file": "/home/nicoor/Project/septem_maria/src/main.c",
+  "output": "CMakeFiles/septem_maria.dir/src/main.c.o"
+},
+{
+  "directory": "/home/nicoor/Project/septem_maria/build/Debug",
+  "command": "/usr/bin/cc -I/home/nicoor/Project/septem_maria/inc -g -std=gnu11 -I/usr/include -o CMakeFiles/septem_maria.dir/src/input.c.o -c /home/nicoor/Project/septem_maria/src/input.c",
+  "file": "/home/nicoor/Project/septem_maria/src/input.c",
+  "output": "CMakeFiles/septem_maria.dir/src/input.c.o"
+},
+{
+  "directory": "/home/nicoor/Project/septem_maria/build/Debug",
+  "command": "/usr/bin/cc -I/home/nicoor/Project/septem_maria/inc -g -std=gnu11 -I/usr/include -o CMakeFiles/septem_maria.dir/src/camera.c.o -c /home/nicoor/Project/septem_maria/src/camera.c",
+  "file": "/home/nicoor/Project/septem_maria/src/camera.c",
+  "output": "CMakeFiles/septem_maria.dir/src/camera.c.o"
+},
+{
+  "directory": "/home/nicoor/Project/septem_maria/build/Debug",
+  "command": "/usr/bin/cc -I/home/nicoor/Project/septem_maria/inc -g -std=gnu11 -I/usr/include -o CMakeFiles/septem_maria.dir/src/ship.c.o -c /home/nicoor/Project/septem_maria/src/ship.c",
+  "file": "/home/nicoor/Project/septem_maria/src/ship.c",
+  "output": "CMakeFiles/septem_maria.dir/src/ship.c.o"
+}
+]

@@ -38,8 +38,6 @@ int main(void) {
                      .orientation = (Quaternion){0.0f, 0.0f, 0.0f, 1.0f}};
 
   Model model = LoadModel("./res/boat/fixed.obj");
-  // Texture2D texture = LoadTexture("./res/boat/boat_body_diffuse.jpg");
-  // model.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = texture;
   BoundingBox bounds = GetMeshBoundingBox(model.meshes[0]);
 
   while (!WindowShouldClose()) {
@@ -53,27 +51,7 @@ int main(void) {
     ClearBackground(RAYWHITE);
     BeginMode3D(camera);
     DrawGrid(20, 1.0f);
-
-    float ang;
-    Vector3 ax;
-    QuaternionToAxisAngle(ship.orientation, &ax, &ang);
-    DrawModelEx(model, ship.position, ax, RAD2DEG * ang,
-                (Vector3){1.0f, 1.0f, 1.0f}, DARKGRAY);
-
-    const float L = 5.0f;
-    Vector3 right =
-        Vector3RotateByQuaternion((Vector3){1, 0, 0}, ship.orientation);
-    Vector3 up =
-        Vector3RotateByQuaternion((Vector3){0, 1, 0}, ship.orientation);
-    Vector3 fwd =
-        Vector3RotateByQuaternion((Vector3){0, 0, 1}, ship.orientation);
-
-    DrawLine3D(ship.position, Vector3Add(ship.position, Vector3Scale(right, L)),
-               RED);
-    DrawLine3D(ship.position, Vector3Add(ship.position, Vector3Scale(up, L)),
-               GREEN);
-    DrawLine3D(ship.position, Vector3Add(ship.position, Vector3Scale(fwd, L)),
-               BLUE);
+    ship_draw(&ship, &model);
     EndMode3D();
     EndDrawing();
   }
