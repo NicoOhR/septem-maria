@@ -37,8 +37,14 @@ int main(void) {
   ship_state ship = {.position = (Vector3){0.0f, 0.0f, 0.0f},
                      .orientation = (Quaternion){0.0f, 0.0f, 0.0f, 1.0f}};
 
-  Model model = LoadModel("./res/boat/fixed.obj");
-  BoundingBox bounds = GetMeshBoundingBox(model.meshes[0]);
+  Model ship_model = LoadModel("./res/boat/fixed.obj");
+  BoundingBox bounds = GetMeshBoundingBox(ship_model.meshes[0]);
+
+  Image checked = GenImageChecked(2, 2, 1, 1, RED, GREEN);
+  Texture2D texture = LoadTextureFromImage(checked);
+  UnloadImage(checked);
+  Model ocean_model = LoadModelFromMesh(GenMeshPlane(2, 2, 4, 3));
+  ocean_model.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = texture;
 
   while (!WindowShouldClose()) {
     UpdateCamera(&camera, CAMERA_CUSTOM);
@@ -51,11 +57,12 @@ int main(void) {
     ClearBackground(RAYWHITE);
     BeginMode3D(camera);
     DrawGrid(20, 1.0f);
-    ship_draw(&ship, &model);
+    ship_draw(&ship, &ship_model);
+    DrawModel(ocean_model, (Vector3){0.0f, 0.0f, 0.0f}, 1.0f, WHITE);
     EndMode3D();
     EndDrawing();
   }
-  UnloadModel(model);
+  UnloadModel(ship_model);
   CloseWindow();
 
   return 0;
